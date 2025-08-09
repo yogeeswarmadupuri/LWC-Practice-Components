@@ -25,6 +25,7 @@
 .profile-section {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
 }
 
@@ -46,8 +47,9 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.contact-details {
-    margin-top: 1rem;
+.contact-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-item {
@@ -55,11 +57,37 @@
     align-items: center;
     gap: 0.75rem;
     font-size: 1rem;
-    color: #e8f4f8;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
 }
 
-.contact-item lightning-icon {
-    --sds-c-icon-color-foreground-default: #a8d4e6;
+.email-icon, .linkedin-icon, .profile-icon, .location-icon, .experience-icon, .trailblazer-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    color: white;
+}
+
+.email-link, .linkedin-link, .profile-link, .trailblazer-link {
+    color: #FFFFFF !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+.location-text, .experience-text {
+    color: #FFFFFF !important;
+    font-weight: 400;
+}
+
+.email-link:hover, .linkedin-link:hover, .profile-link:hover, .trailblazer-link:hover {
+    color: #63B3ED;
+    text-decoration: underline;
 }
 
 /* Sections */
@@ -229,16 +257,6 @@
 }
 
 /* Download Section */
-.download-section {
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0;
-    margin-top: 1rem;
-}
-
-.button-group {
-    background: #FFFFFF;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.download-button-container {
+    margin-left: auto;
 }

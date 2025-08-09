@@ -10,23 +10,34 @@
                     <h1 class="name">{name}</h1>
                     <p class="title">Senior Salesforce Developer</p>
                     <div class="contact-details">
-                        <div class="contact-item">
-                            <lightning-icon icon-name="utility:email" size="x-small"></lightning-icon>
-                            <span>{email}</span>
+                        <div class="contact-item email-item">
+                            <span class="email-icon">✉</span>
+                            <a href={mailToLink} class="email-link">{email}</a>
                         </div>
                         <div class="contact-item">
-                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px;" />
-                        <a href={linkedInUrl} target="_blank" class={linkedinProfile}>{linkedInUrlLabel}</a>
+                            <span class="linkedin-icon">in</span>
+                            <a href={linkedInUrl} target="_blank" class="linkedin-link">{linkedInUrlLabel}</a>
                         </div>
                         <div class="contact-item">
-                            <lightning-icon icon-name="utility:location" size="x-small"></lightning-icon>
-                            <span>{location}</span>
+                            <span class="trailblazer-icon">🏆</span>
+                            <a href={trailblazerUrl} target="_blank" class="trailblazer-link">Trailblazer</a>
                         </div>
                         <div class="contact-item">
-                            <lightning-icon icon-name="utility:work" size="x-small"></lightning-icon>
-                            <span>{experience}</span>
+                            <span class="location-icon">📍</span>
+                            <span class="location-text">{location}</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="experience-icon">💼</span>
+                            <span class="experience-text">{experience}</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="profile-icon">👤</span>
+                            <a href="https://yogidev-dev-ed.my.site.com/profile/" target="_blank" class="profile-link">View Public Profile</a>
                         </div>
                     </div>
+                </div>
+                <div class="download-button-container">
+                    <lightning-button label="Download Resume" icon-name="utility:download" icon-position="left" variant="brand" onclick={handleDownloadPDF}></lightning-button>
                 </div>
             </div>
         </div>
@@ -35,7 +46,7 @@
         <div class="section">
             <h2 class="section-title">Professional Summary</h2>
             <p class="summary-text">
-                Having 9.6 years in the IT industry, I possess 6.6 years of specialized expertise in customizing
+                Having 10 years in the IT industry, I possess 7 years of specialized expertise in customizing
                 Salesforce.com (SFDC) and crafting Force.com applications. My skill set extends to seamlessly
                 integrating Salesforce with external systems, as well as designing and implementing solutions
                 using Lightning components and Apex. Additionally, I bring 3 years of hands-on experience in
@@ -152,17 +163,6 @@
             </template>
         </div>
     </div>
-        <!-- Download Section -->
-        <div class="download-section">
-            <div class="button-group">
-                <lightning-button-group>
-                    <lightning-button 
-                        label="Download PDF" 
-                        variant="brand" 
-                        onclick={handleDownloadPDF}>
-                    </lightning-button>
-                </lightning-button-group>
-            </div>
-        </div>
+        
     </div>
 </template>

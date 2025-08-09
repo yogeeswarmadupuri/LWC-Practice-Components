@@ -3,10 +3,14 @@ import profilePic from '@salesforce/resourceUrl/profilePhoto';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { loadScript } from 'lightning/platformResourceLoader';
 import JSPDF from '@salesforce/resourceUrl/jspdf';
+import linkedInImage from '@salesforce/resourceUrl/linkedinSvg'; // Assuming you have a LinkedIn image resource
 
 export default class GptProfileComponent extends LightningElement {
     jsPdfInitialized = false;
     jsPDF;
+    linkedinImage = linkedInImage; // LinkedIn image resource
+    
+
 
     renderedCallback() {
         if (this.jsPdfInitialized) {
@@ -30,10 +34,12 @@ export default class GptProfileComponent extends LightningElement {
     profilePicUrl = profilePic;
     name = 'Yogeeswar M';
     email = 'yogeeswar09@gmail.com';
+    mailToLink = 'mailto:' + this.email; // Assuming you have an email variable defined
     location = 'Hyderabad, India';
-    experience = '9.6 years in IT industry, 6.6 years in Salesforce';
+    experience = '10 years in IT industry, 7 years in Salesforce';
     linkedInUrl = 'https://www.linkedin.com/in/yogeeswar-madupuri/';
     linkedInUrlLabel = 'LinkedIn Profile';
+    trailblazerUrl = 'https://www.salesforce.com/trailblazer/ymadupuri';
 
     handleDownloadPDF() {
         if (!this.jsPdfInitialized || !this.jsPDF) {
@@ -296,9 +302,12 @@ export default class GptProfileComponent extends LightningElement {
 
     // Skills categorized
     salesforceSkills = [
+        'Agentforce',
+        'Prompt Template',
+        'Agent Actions',
+        'Agentforce with Salesforce Einstein',
         'Apex with Enterprise Patterns',
         'Lightning Web Components (LWC)',
-        'Aura Components',
         'SOQL/SOSL',
         'Experience Cloud',
         'Sales Cloud',
