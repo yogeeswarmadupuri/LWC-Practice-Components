@@ -1,0 +1,168 @@
+<template>
+    <div class="resume-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="profile-section">
+                <div class="profile-image-container">
+                    <img src={profilePicUrl} alt="Profile Picture" class="profile-image" />
+                </div>
+                <div class="contact-info">
+                    <h1 class="name">{name}</h1>
+                    <p class="title">Senior Salesforce Developer</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <lightning-icon icon-name="utility:email" size="x-small"></lightning-icon>
+                            <span>{email}</span>
+                        </div>
+                        <div class="contact-item">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px;" />
+                        <a href={linkedInUrl} target="_blank" class={linkedinProfile}>{linkedInUrlLabel}</a>
+                        </div>
+                        <div class="contact-item">
+                            <lightning-icon icon-name="utility:location" size="x-small"></lightning-icon>
+                            <span>{location}</span>
+                        </div>
+                        <div class="contact-item">
+                            <lightning-icon icon-name="utility:work" size="x-small"></lightning-icon>
+                            <span>{experience}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="summary-text">
+                Having 9.6 years in the IT industry, I possess 6.6 years of specialized expertise in customizing
+                Salesforce.com (SFDC) and crafting Force.com applications. My skill set extends to seamlessly
+                integrating Salesforce with external systems, as well as designing and implementing solutions
+                using Lightning components and Apex. Additionally, I bring 3 years of hands-on experience in
+                automation testing, leveraging Selenium and Java technologies.
+            </p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Salesforce Expertise</h3>
+                    <div class="skills-grid">
+                        <template for:each={salesforceSkills} for:item="skill">
+                            <span key={skill} class="skill-tag salesforce-skill">{skill}</span>
+                        </template>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Secondary Technologies</h3>
+                    <div class="skills-grid">
+                        <template for:each={secondarySkills} for:item="skill">
+                            <span key={skill} class="skill-tag secondary-skill">{skill}</span>
+                        </template>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Leadership & Soft Skills</h3>
+                    <div class="skills-grid">
+                        <template for:each={leadershipSkills} for:item="skill">
+                            <span key={skill} class="skill-tag leadership-skill">{skill}</span>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-grid">
+                <template for:each={certifications} for:item="cert">
+                    <div key={cert.name} class="certification-card">
+                        <img src={cert.imageUrl} alt={cert.name} class="cert-badge"/>
+                        &nbsp;
+                        <span class="certification-name">{cert.name}</span>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Work Experience Section -->
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-timeline">
+                <template for:each={workExperience} for:item="job">
+                    <div key={job.company} class="experience-item">
+                        <div class="timeline-dot"></div>
+                        <div class="experience-content">
+                            <div class="job-header">
+                                <h3 class="company-name">{job.company}</h3>
+                                <span class="duration">{job.duration}</span>
+                            </div>
+                            <p class="position">{job.position}</p>
+                            <template if:true={job.project}>
+                                <p class="project-info">Key Project: {job.project}</p>
+                            </template>
+                            <template if:true={job.projects}>
+                                <div class="projects-list">
+                                    <p class="projects-label">Key Projects:</p>
+                                    <template for:each={job.projects} for:item="project">
+                                        <span key={project} class="project-tag">{project}</span>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-list">
+                <template for:each={education} for:item="edu">
+                    <div key={edu.institution} class="education-item">
+                        <div class="education-content">
+                            <h3 class="institution">{edu.institution}</h3>
+                            <template if:true={edu.degree}>
+                                <p class="degree">{edu.degree}</p>
+                            </template>
+                            <div class="education-details">
+                                <span class="year">{edu.year}</span>
+                                &nbsp;
+                                <span class="grade">{edu.grade}</span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Key Achievements Section -->
+        <div class="section">
+        <h2 class="section-title">Key Achievements - Salesforce Development & Automation</h2>
+        <div class="achievements-list">
+            <template for:each={achievements} for:item="achievement">
+                <div key={achievement} class="achievement-item">
+                    <lightning-icon icon-name="utility:check" size="x-small" class="achievement-icon"></lightning-icon>
+                    <span class="achievement-text">{achievement}</span>
+                </div>
+            </template>
+        </div>
+    </div>
+        <!-- Download Section -->
+        <div class="download-section">
+            <div class="button-group">
+                <lightning-button-group>
+                    <lightning-button 
+                        label="Download PDF" 
+                        variant="brand" 
+                        onclick={handleDownloadPDF}>
+                    </lightning-button>
+                </lightning-button-group>
+            </div>
+        </div>
+    </div>
+</template>

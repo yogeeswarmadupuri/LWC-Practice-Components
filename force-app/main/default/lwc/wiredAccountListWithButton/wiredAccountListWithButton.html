@@ -1,0 +1,34 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Latest Modified Account" icon-name="standard:account">
+        <lightning-button variant="brand" label="Display Account" title="Display Account" onclick={handleClick}></lightning-button>
+        <table if:true = {accountDetailsList} class="slds-m-around_large content-management">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Rating</th>
+                    <th>Industry</th>
+                    <th>Type</th>
+                    <th>WebSite</th>
+                    <th>No of Employees</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={accountDetailsList} for:item="accountDetail">
+                    <tr key={accountDetail.Name}>
+                        <td>{accountDetail.Name}</td>
+                        <td>{accountDetail.Phone}</td>
+                        <td>{accountDetail.Rating}</td>
+                        <td>{accountDetail.Industry}</td>
+                        <td>{accountDetail.Type}</td>
+                        <td>{accountDetail.Website}</a></td>
+                        <td>{accountDetail.NumberOfEmployees}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <template if:true={error}>
+            <p>{error}</p>
+        </template>
+    </lightning-card>
+</template>

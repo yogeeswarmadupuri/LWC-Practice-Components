@@ -1,0 +1,15 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Create Account and Contact" icon-name="standard:account">
+        <lightning-input type="text" variant="standard" name="Name" label="Account Name" onchange={handleAccountChange}></lightning-input>
+        <lightning-input type="text" variant="standard" name="Integration_Status__c" label="Integration Status" placeholder="Success or Failure" onchange={handleAccountChange}></lightning-input>
+        <lightning-input type="text" variant="standard" name="FirstName" label="First Name" onchange={handleContactChange}></lightning-input>
+        <lightning-input type="text" variant="standard" name="LastName" label="Last Name" onchange={handleContactChange}></lightning-input>
+        <lightning-input type="email" variant="standard" name="Email" label="Email" onchange={handleContactChange}></lightning-input>
+        <lightning-input type="tel" variant="standard" name="Phone" label="Phone" onchange={handleContactChange}></lightning-input>
+        
+        <div class="slds-m-around_large slds-text-align_center">
+            <lightning-button variant="brand" label="Create Records" title="Create Records" onclick={handleCreateRecords}></lightning-button>
+        </div>
+        
+    </lightning-card>
+</template>

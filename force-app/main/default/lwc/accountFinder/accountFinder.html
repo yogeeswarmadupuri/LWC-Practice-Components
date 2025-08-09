@@ -1,0 +1,12 @@
+<template>
+    <lightning-card>
+        <lightning-input type="number" variant="standard" formatter="currency" label="Annual Revenue" onchange={handleChange} value={annualRevenue}></lightning-input>
+        <lightning-button variant="brand" label="Reset" title="reset" name = "reset" onclick={reset}></lightning-button>
+
+        <template if:true={accounts.data} for:each={accounts.data} for:item="accountName" for:index="index">
+            <li key={accountName.Id}>
+                {accountName.Name}
+            </li>
+        </template>
+    </lightning-card>
+</template>

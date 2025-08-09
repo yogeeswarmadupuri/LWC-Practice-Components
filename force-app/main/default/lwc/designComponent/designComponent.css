@@ -1,0 +1,5 @@
+.input-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates two columns with equal width */
+    grid-gap: 10px; /* Adds a 10px gap between grid items */
+}

@@ -1,0 +1,30 @@
+<template>
+    <div if:true={isAccountSelected}>
+        <lightning-card  variant="Narrow"  title="Selected Account Information" icon-name="standard:account">
+            <table class="slds-m-around_large content-management">
+                <thead>
+                    <tr>
+                        <th>Account Name</th>
+                        <th>Phone</th>
+                        <th>Type</th>
+                        <th>No of Employees</th>
+                        <th>Industry</th>
+                        <th>Website</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={selectedAccountList} for:item="accountDetail">
+                        <tr key={accountDetail.Name}>
+                            <td><strong>{accountDetail.Name}</strong></td>
+                            <td>{accountDetail.Phone}</td>
+                            <td>{accountDetail.Type}</td>
+                            <td>{accountDetail.NumberOfEmployees}</td>
+                            <td>{accountDetail.Industry}</td>
+                            <td>{accountDetail.Website}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </lightning-card>
+    </div>
+</template>

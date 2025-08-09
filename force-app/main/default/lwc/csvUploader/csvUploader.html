@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="CSV Uploader" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <input type="file" accept=".csv" onchange={handleFileChange} />
+            <template if:true={validationResult}>
+                <p>{validationResult}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,22 @@
+<template>
+    <lightning-quick-action-panel header="Create Contact">
+        <div class="slds-p-horizontal_small">
+            <lightning-input type="text" variant="standard" name="FirstName" label="First name" onchange={handleInputdata} required="true"></lightning-input>
+            <lightning-input type="text" variant="standard" name="LastName" label="Last name" onchange={handleInputdata} required="true"></lightning-input>
+            <lightning-input type="email" variant="standard" name="Email" label="Email" onchange={handleInputdata} required="true"></lightning-input>
+            <lightning-input type="tel" variant="standard" name="Phone" label="Phone" required="true" onchange={handleInputdata}></lightning-input>
+            <lightning-input type="text" variant="standard" name="Fax" label="Fax" onchange={handleInputdata}></lightning-input>
+            <lightning-textarea name="MailingStreet" label="Street" required="true" onchange={handleInputdata} ></lightning-textarea>
+            <div class="input-fields">
+                <lightning-input type="text" variant="standard" name="MailingCity" label="City" onchange={handleInputdata} required></lightning-input>
+                <lightning-input type="text" variant="standard" name="MailingState" label="State/Province" onchange={handleInputdata} required></lightning-input>
+                <lightning-input type="text" variant="standard" name="MailingCountry" label="Country" onchange={handleInputdata} required></lightning-input>
+                <lightning-input type="text" variant="standard" name="MailingPostalCode" label="Postal Code" onchange={handleInputdata} required></lightning-input>
+            </div>
+        </div>
+        <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={handlePopUpClose}></lightning-button>
+            <lightning-button variant="brand" label="Save" class="slds-m-left_x-small" onclick={createContact}></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

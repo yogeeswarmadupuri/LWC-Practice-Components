@@ -1,0 +1,14 @@
+/* professionalJourney.css */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    border: 3px solid #e0e0e0; /* Adds a light grey border */
+}
+
+.section-header {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #0176d3; /* Blue underline for section headers */
+    color: #00193c; /* Dark blue color for header text */
+}

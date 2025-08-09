@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apex:page renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" controller="ResumePDFController">
+    <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; }
+                .header { margin-bottom: 20px; }
+                .name { font-size: 24px; margin-bottom: 5px; }
+                .contact-info { margin-bottom: 15px; }
+                .section { margin-bottom: 20px; }
+                .section-title { font-size: 18px; margin-bottom: 10px; }
+                .skill-tag { 
+                    background: #f4f6f9;
+                    padding: 5px 10px;
+                    margin: 3px;
+                    border-radius: 3px;
+                    display: inline-block;
+                }
+                .experience-item { margin-bottom: 15px; }
+                .company-name { font-weight: bold; }
+                .achievement-item { margin-bottom: 5px; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <div class="name">{!resumeData.name}</div>
+                <div class="contact-info">
+                    <div>{!resumeData.email}</div>
+                    <div>{!resumeData.location}</div>
+                    <div>{!resumeData.experience}</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Professional Summary</div>
+                <div>{!resumeData.summary}</div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Technical Skills</div>
+                <div>
+                    <strong>Salesforce Expertise:</strong><br/>
+                    <apex:repeat value="{!resumeData.salesforceSkills}" var="skill">
+                        <span class="skill-tag">{!skill}</span>
+                    </apex:repeat>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Professional Experience</div>
+                <apex:repeat value="{!resumeData.workExperience}" var="job">
+                    <div class="experience-item">
+                        <div class="company-name">{!job.company}</div>
+                        <div>{!job.position}</div>
+                        <div>{!job.duration}</div>
+                        <apex:outputText value="{!job.project}" rendered="{!NOT(ISBLANK(job.project))}"/>
+                    </div>
+                </apex:repeat>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Education</div>
+                <apex:repeat value="{!resumeData.education}" var="edu">
+                    <div class="experience-item">
+                        <div class="company-name">{!edu.institution}</div>
+                        <apex:outputText value="{!edu.degree}" rendered="{!NOT(ISBLANK(edu.degree))}"/>
+                        <div>{!edu.year} - {!edu.grade}</div>
+                    </div>
+                </apex:repeat>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Key Achievements</div>
+                <apex:repeat value="{!resumeData.achievements}" var="achievement">
+                    <div class="achievement-item">• {!achievement}</div>
+                </apex:repeat>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,35 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Lead Information" icon-name="standard:lead">
+        <div if:true={editFormtoBeDisplayed}>
+            <lightning-input type="text" variant="standard" name="FirstName" label="First Name" onchange={handleOnChange} required="true" value={recordData.fields.FirstName.value}></lightning-input>
+            <lightning-input type="text" variant="standard" name="LastName" label="Last Name" onchange={handleOnChange} required="true" value={recordData.fields.LastName.value}></lightning-input>
+            <lightning-input type="email" variant="standard" name="Email" label="Email" onchange={handleOnChange} required="true" value={recordData.fields.Email.value}></lightning-input>
+            <lightning-input type="text" variant="standard" name="Title" label="Title" onchange={handleOnChange} required="true" value={recordData.fields.Title.value}></lightning-input>
+            <lightning-input type="text" variant="standard" name="Phone" label="Phone" onchange={handleOnChange} required="true" value={recordData.fields.Phone.value}></lightning-input>
+            <lightning-input type="text" variant="standard" name="Company" label="Company" onchange={handleOnChange} required="true" value={recordData.fields.Company.value}></lightning-input>
+            <lightning-combobox name="Industry" label="Industry" onchange={handleOnChange} options={industryOption} required="true" value={recordData.fields.Industry.value}></lightning-combobox>
+            <lightning-input type="number" variant="standard" name="AnnualRevenue" label="Annual Revenue" formatter="currency" step=".01" onchange={handleOnChange} required="true" value={recordData.fields.AnnualRevenue.value}></lightning-input>
+            <lightning-combobox name="LeadSource" label="Lead Source" onchange={handleOnChange} options={leadSourceOptions} required="true" value={recordData.fields.LeadSource.value}></lightning-combobox>
+            <div class="slds-m-around_large slds-text-align_center">
+                <lightning-button variant="brand" label="Update Information" title="Update Information" onclick={handleupdateLeadInformation}></lightning-button>
+            </div>
+        </div>
+        <div if:false={editFormtoBeDisplayed}>
+            <lightning-record-view-form
+                        record-id={recordId}
+                        object-api-name={objectApiName}>
+                <div class="slds-box slds-theme_default">
+                    <lightning-output-field field-name="Name" ></lightning-output-field>
+                    <lightning-output-field field-name="Phone"></lightning-output-field>
+                    <lightning-output-field field-name="Email"></lightning-output-field>
+                    <lightning-output-field field-name="Title"></lightning-output-field>
+                    <lightning-output-field field-name="Company"></lightning-output-field>
+                    <lightning-output-field field-name="Industry"></lightning-output-field>
+                    <lightning-output-field field-name="AnnualRevenue"></lightning-output-field>
+                    <lightning-output-field field-name="LeadSource"></lightning-output-field>
+                    <lightning-button class="slds-m-top_small" variant="brand" type="submit" label="Edit Information" onclick={handleEditInformation}></lightning-button>
+                </div>
+            </lightning-record-view-form>
+        </div>
+    </lightning-card>
+</template>

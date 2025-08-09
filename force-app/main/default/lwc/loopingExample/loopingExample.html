@@ -1,0 +1,61 @@
+<template>
+    <div class="slds-m-around_large">
+        <lightning-card  variant="Narrow"  title="Contact Details" icon-name="standard:contact" class="content-management">
+            <ul if:true={contactDetails}>
+                <template for:each={contactDetails} for:item="contact">
+                    <li key={contact.name}>
+                        {contact.name},{contact.department},{contact.yearofPassing},{contact.course}
+                    </li>
+
+                </template>            </ul>
+            
+        </lightning-card> </div>
+
+        <table if:true = {contactDetails} class="slds-m-around_large content-management">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Year Of Passing</th>
+                    <th>Course Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={contactDetails} for:item="contact">
+                    <tr key={contact.name}>
+                        <td>{contact.name}</td>
+                        <td>{contact.department}</td>
+                        <td>{contact.yearofPassing}</td>
+                        <td>{contact.course}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+        <div if:true={recordList}>
+            <table class="slds-m-around_large content-management">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Title</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Picture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={recordList} for:item="contact">
+                        <tr key={contact.FirstName}>
+                            <td>{contact.FirstName}</td>
+                            <td>{contact.LastName}</td>
+                            <td>{contact.Title}</td>
+                            <td>{contact.Email}</td>
+                            <td>{contact.Phone}</td>
+                            <td><img src={contact.Picture__c}></img></td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+</template>

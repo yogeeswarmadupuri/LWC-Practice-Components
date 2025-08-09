@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Parent Component">
+        <div class="slds-m-around_medium">
+            <lightning-button label="Show Modal" onclick={handleShowModal}></lightning-button>
+        </div>
+    </lightning-card>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Terms and Conditions</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-box slds-theme_error">
+                        <template for:each={errors} for:item="error">
+                            <p key={error}>{error}</p>
+                        </template>
+                    </div>
+                    <div class="slds-m-top_medium">
+                        <lightning-input type="checkbox" label="I agree to the terms and conditions" onchange={handleCheckboxChange} required></lightning-input>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={handleCancel}>Cancel</button>
+                    <button class="slds-button slds-button_brand slds-m-left_x-small" onclick={handleConfirm}>Confirm</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

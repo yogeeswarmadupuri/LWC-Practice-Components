@@ -1,0 +1,24 @@
+.content-management{
+    width: 400px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+}
+body {
+    margin: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}

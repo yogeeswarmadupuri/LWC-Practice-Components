@@ -1,0 +1,14 @@
+<template>
+        <div if:false={selectedValue}>
+            <lightning-card  variant="Narrow"  title="Object Selection" icon-name="standard:account">
+                <lightning-combobox
+                label="Object Selection"
+                options={objectOptions}
+                onchange={handleChange} ></lightning-combobox>
+            </lightning-card>
+        </div>
+        <div if:true={selectedValue}>
+            <c-create-object-by-parameter selectedobject ={selectedValue} oneventreceived = {handleEventreceived}></c-create-object-by-parameter>
+        </div>
+    
+</template>

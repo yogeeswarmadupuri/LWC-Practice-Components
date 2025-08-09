@@ -1,0 +1,17 @@
+<template>
+    <div>
+        <h1>Click on any button to see the changes into the UI</h1>
+    </div>
+    <div class = "slds-button_outline-brand click-button1">
+        <lightning-button title="Button1" label="Button1" onclick={handleButton1Click}></lightning-button>
+    </div>
+    
+    <lightning-button class = "slds-button_neutral" title="Button2" label="Button2" onclick={handleButton2Click}></lightning-button>
+    <div if:true={displayButton1text}>
+        <h1> Button 1 Clicked</h1>
+    </div>
+    <div if:true={displayButton2text}>
+        <h1> Button 2 Clicked</h1>
+    </div>
+    
+</template>

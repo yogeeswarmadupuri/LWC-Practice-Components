@@ -1,0 +1,17 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
+        <p>
+            <Strong> Default Record Type Id</Strong>{objectinfo.defaultRecordTypeId}
+        </p>
+        <lightning-input type="text" variant="standard" name="Name" label="Account Name" onchange={handleChangeddata}></lightning-input>
+        <lightning-input type="tel" variant="standard" name="Phone" label="Phone" onchange={handleChangeddata}></lightning-input>
+        <lightning-combobox
+            name="Industry"
+            label="Industry"
+            options={industryOptions}
+            onchange={handleChangeddata}></lightning-combobox>
+        <div class="slds-m-around_large slds-text-align_center">
+            <lightning-button variant="brand" label="Create Account" title="Create Account" onclick={createAccount}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

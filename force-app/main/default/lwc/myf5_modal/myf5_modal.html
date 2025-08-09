@@ -1,0 +1,17 @@
+<template>
+    <lightning-modal-header label="Terms and Conditions"></lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-box slds-theme_error">
+            <template for:each={errors} for:item="error">
+                <p key={error}>{error}</p>
+            </template>
+        </div>
+        <div class="slds-m-top_medium">
+            <lightning-input type="checkbox" label="I agree to the terms and conditions" onchange={handleCheckboxChange} required></lightning-input>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+        <lightning-button label="Confirm" variant="brand" onclick={handleConfirm} class="slds-m-left_x-small"></lightning-button>
+    </lightning-modal-footer>
+</template>

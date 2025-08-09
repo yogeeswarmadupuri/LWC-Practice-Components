@@ -1,0 +1,9 @@
+<template>
+    <div if:true={selectedContactDetails}>
+        <c-display-contact-records contact-list={filteredContactList}></c-display-contact-records>
+    </div>
+    <p onselectedcontact = {handleSelectedContact}></p>
+    <div if:true={hideTitletable}>
+        <c-display-contact-list-with-title contact-list={contactRecords}></c-display-contact-list-with-title>
+    </div>
+</template>

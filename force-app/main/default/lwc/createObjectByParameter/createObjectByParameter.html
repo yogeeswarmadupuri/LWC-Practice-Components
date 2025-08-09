@@ -1,0 +1,54 @@
+<template>
+    <div if:true={accountPanelToBeEnabled}>
+        <lightning-card  variant="Narrow"  title="Create Account" icon-name="standard:account">
+            <lightning-input type="text" variant="standard" name="Name" label="Account Name" onchange={handleAccountChange}></lightning-input>
+            <lightning-input type="tel" variant="standard" name="Phone" label="Phone" onchange={handleAccountChange}></lightning-input>
+            <lightning-combobox
+                name="Industry"
+                label="Industry"
+                options={industryOptions}
+                onchange={handleAccountChange}></lightning-combobox>
+            <div class="slds-m-around_large margininline">
+                <lightning-button variant="brand" label="Create Account" title="Create Account" onclick={handleCreateAccount}></lightning-button>
+            </div>
+        </lightning-card>
+    </div>
+    <div if:true={contactPanelToBeEnabled}>
+        <lightning-card  variant="Narrow"  title="Create Contact" icon-name="standard:contact">
+            <lightning-input label="First Name" name = "FirstName"  onchange={handleContactChange}></lightning-input>
+            <lightning-input label="Last Name" name = "LastName"  onchange={handleContactChange}></lightning-input>
+            <lightning-input type="email" name = "Email"  label="Email"  onchange={handleContactChange}></lightning-input>
+            <lightning-input type="tel" name = "Phone"  label="Phone"  onchange={handleContactChange}></lightning-input>
+            <lightning-input label="Title" name = "Title"   onchange={handleContactChange}></lightning-input>
+            <lightning-input label="Department" name = "Department"  onchange={handleContactChange}></lightning-input>
+            <lightning-combobox
+                name="Level__c"
+                label="Level"
+                options={levelOptions}
+                onchange={handleContactChange}></lightning-combobox>
+            <div class="slds-m-around_large margininline">
+                <lightning-button variant="brand" label="Create Contact" title="Create Contact" onclick={handleCreateContact}></lightning-button>
+            </div>
+        </lightning-card>
+    </div>
+    <div if:true={opportunitypanelToBeEnabled}>
+        <lightning-card  variant="Narrow"  title="Create Opportunity" icon-name="standard:opportunity">
+            <lightning-input type="text" variant="standard" name="Name" label="Opportunity Name" onchange={handleOpportunityChange}></lightning-input>
+            <lightning-input type="date" variant="standard" name="CloseDate" label="Close Date" onchange={handleOpportunityChange}></lightning-input>
+            <lightning-combobox
+                name="StageName"
+                label="Stage Name"
+                options={stageNameOptions}
+                onchange={handleOpportunityChange} ></lightning-combobox>
+
+                <lightning-combobox
+                name="Type"
+                label="Type"
+                options={typeOptions}
+                onchange={handleOpportunityChange} ></lightning-combobox>
+                <div class="slds-m-around_large margininline">
+                    <lightning-button variant="brand" label="Create Opportunity" title="Create Opportunity" onclick={handleCreateOpportunity}></lightning-button>
+                </div>
+        </lightning-card>
+    </div>
+</template>

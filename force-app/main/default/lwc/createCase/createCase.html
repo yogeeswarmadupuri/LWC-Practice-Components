@@ -1,0 +1,14 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Create Case" icon-name="standard:case">
+        <div class="slds-p-horizontal_small">
+            <lightning-input type="text" variant="standard" name="Subject" label="Subject" onchange={handleChangeddata} required="true"></lightning-input>
+            <lightning-combobox name="Status" label="Status" onchange={handleChangeddata}  options={statusOptions} required="true"></lightning-combobox>
+            <lightning-combobox name="Priority" label="Priority" onchange={handleChangeddata}  options={priorityOptions} required="true"></lightning-combobox>
+            <lightning-textarea name="Description" label="Description" onchange={handleChangeddata} required="true"></lightning-textarea>
+            <lightning-combobox name="Region__c" label="Region" onchange={handleChangeddata}  options={regionOptions} required="true"></lightning-combobox>
+        </div>
+        <div class="slds-m-around_large slds-text-align_center">
+            <lightning-button variant="brand" label="Create Case" title="Create Case" onclick={createCase}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

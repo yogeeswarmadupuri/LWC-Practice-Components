@@ -1,0 +1,27 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Create Account" icon-name="standard:account">
+        <lightning-input type="text" variant="standard" name="name" label="Account Name" onchange={handleAccountChange}></lightning-input>
+        <lightning-input type="tel" variant="standard" name="phone" label="Phone" onchange={handleAccountChange}></lightning-input>
+        <lightning-input type="text" variant="standard" name="integration" label="Integration Status" onchange={handleAccountChange}></lightning-input>
+        <lightning-input type="text" variant="standard" name="noOfEmployees" label="Number Of Employees" onchange={handleAccountChange} ></lightning-input>
+        <lightning-input type="text" variant="standard" name="website" label="Website" onchange={handleAccountChange}></lightning-input>
+        <lightning-combobox
+            name="industry"
+            label="Industry"
+            options={industryOptions}
+            onchange={handleAccountChange}></lightning-combobox>
+            <lightning-combobox
+            name="type"
+            label="Type"
+            options={typeOptions}
+            onchange={handleAccountChange}></lightning-combobox>
+            <lightning-combobox
+            name="rating"
+            label="Rating"
+            options={ratingOptions}
+            onchange={handleAccountChange}></lightning-combobox>
+        <div class="slds-m-around_large">
+            <lightning-button variant="brand" label="Create Account" title="Create Account" onclick={handleCreateAccount} style="margin-inline: auto;"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

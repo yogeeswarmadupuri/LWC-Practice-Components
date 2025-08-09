@@ -1,0 +1,21 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Contact Quick View" icon-name="standard:contact">
+        <lightning-record-view-form
+                record-id={recordId}
+                object-api-name={objectApiName}
+                density="compact"
+                >
+        <div class="slds-box slds-theme_default">
+            <lightning-output-field field-name="Name" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="Email" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="Title" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="Phone" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="AccountId" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="Fax" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="MailingAddress" variant="standard"></lightning-output-field>
+            <lightning-output-field field-name="OtherAddress" variant="standard"></lightning-output-field>
+        </div>
+    </lightning-record-view-form>
+    </lightning-card>
+    
+</template>

@@ -1,0 +1,26 @@
+<template>
+    <div if:true={accountDetailsList}>
+        <lightning-card  variant="Narrow"  title="Account Details" icon-name="standard:account">
+            <table class="slds-m-around_large content-management">
+                <thead>
+                    <tr>
+                        <th>Account Name</th>
+                        <th>Industry</th>
+                        <th>Phone</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={accountDetailsList} for:item="accountDetail">
+                        <tr key={accountDetail.Name}>
+                            <td><a href="#" target="_blank" data-name={accountDetail.Name} data-phone={accountDetail.Phone} onclick={handleSelectedAccount}>{accountDetail.Name}</a></td>
+                            <td>{accountDetail.Industry}</td>
+                            <td>{accountDetail.Phone}</td>
+                            <td>{accountDetail.Rating}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </lightning-card>
+    </div>
+</template>

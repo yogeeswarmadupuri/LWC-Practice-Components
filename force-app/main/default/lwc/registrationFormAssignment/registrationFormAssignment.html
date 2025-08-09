@@ -1,0 +1,48 @@
+<template>
+    <!--input Text Field -->
+    <div class="slds-p-around_medium text-lgc-bg">
+        <lightning-input type="text" label="Name" onchange={handleInputChange}></lightning-input>
+    </div>
+
+    <!--input Email Field -->
+    <div class="slds-p-around_medium email-lgc-bg">
+        <lightning-input type="email" label="Email address" placeholder="type here..." onchange={handleEmailChange}></lightning-input>
+    </div>
+
+    <lightning-input class = "slds-p-around_medium lgc-bg" type="tel" label="Phone Number" placeholder = "123-123-1234" name="phone3" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></lightning-input>
+    <template if:true={hasOptions}>
+        <div class="slds-combobox-picklist">
+            <select name="department" id="department">
+                <option value="Select Department">Select Department</option>
+                <template for:each={departments} for:item="department">
+                    <option key = {department.name} value={department.value}>{department.name}</option>
+                </template>
+            </select>
+        </div>
+    </template>
+    <lightning-combobox
+        name="Department"
+        label="Department"
+        placeholder="Select Department"
+        options={departments}>
+    </lightning-combobox>
+    
+
+    <lightning-input-address class="slds-p-around_medium"
+        address-label="Address"
+        street-label="Street"
+        city-label="City"
+        country-label="Country"
+        province-label="Province"
+        postal-code-label="PostalCode"
+        required
+        field-level-help="User should key in their correct address details" >
+    </lightning-input-address>
+
+    <h1 class = "slds-p-around_medium" if:true={nameToBeDisplayed}>The Entered Name is {nameFieldValue}</h1>
+    <h1 class = "slds-p-around_medium" if:true={emailToBeDisplayed}>The Entered Email Address is {emailFieldvalue}</h1>
+
+
+
+    
+</template>
