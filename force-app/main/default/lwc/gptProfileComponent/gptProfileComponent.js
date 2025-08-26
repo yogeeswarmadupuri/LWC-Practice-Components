@@ -33,13 +33,14 @@ export default class GptProfileComponent extends LightningElement {
     // Personal Information
     profilePicUrl = profilePic;
     name = 'Yogeeswar M';
-    email = 'yogeeswar09@gmail.com';
+    email = 'yogeeswar99@gmail.com';
     mailToLink = 'mailto:' + this.email; // Assuming you have an email variable defined
     location = 'Hyderabad, India';
     experience = '10 years in IT industry, 7 years in Salesforce';
     linkedInUrl = 'https://www.linkedin.com/in/yogeeswar-madupuri/';
     linkedInUrlLabel = 'LinkedIn Profile';
     trailblazerUrl = 'https://www.salesforce.com/trailblazer/ymadupuri';
+    githubUrl = 'https://github.com/yogeeswarmadupuri';
 
     handleDownloadPDF() {
         if (!this.jsPdfInitialized || !this.jsPDF) {

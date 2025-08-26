@@ -61,7 +61,7 @@
     margin-bottom: 0.5rem;
 }
 
-.email-icon, .linkedin-icon, .profile-icon, .location-icon, .experience-icon, .trailblazer-icon {
+.email-icon, .linkedin-icon, .profile-icon, .location-icon, .experience-icon, .trailblazer-icon, .github-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +73,7 @@
     color: white;
 }
 
-.email-link, .linkedin-link, .profile-link, .trailblazer-link {
+.email-link, .linkedin-link, .profile-link, .trailblazer-link, .github-link {
     color: #FFFFFF !important;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -85,7 +85,7 @@
     font-weight: 400;
 }
 
-.email-link:hover, .linkedin-link:hover, .profile-link:hover, .trailblazer-link:hover {
+.email-link:hover, .linkedin-link:hover, .profile-link:hover, .trailblazer-link:hover, .github-link:hover {
     color: #63B3ED;
     text-decoration: underline;
 }
