@@ -3,12 +3,10 @@ import profilePic from '@salesforce/resourceUrl/profilePhoto';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { loadScript } from 'lightning/platformResourceLoader';
 import JSPDF from '@salesforce/resourceUrl/jspdf';
-import linkedInImage from '@salesforce/resourceUrl/linkedinSvg'; // Assuming you have a LinkedIn image resource
 
 export default class GptProfileComponent extends LightningElement {
     jsPdfInitialized = false;
     jsPDF;
-    linkedinImage = linkedInImage; // LinkedIn image resource
     
 
 
@@ -18,14 +16,11 @@ export default class GptProfileComponent extends LightningElement {
         }
         
         Promise.all([
-            loadScript(this, JSPDF + '?' + new Date().getTime())
+            loadScript(this, JSPDF)
         ]).then(() => {
-            // Store reference to the library
             this.jsPDF = window.jspdf.jsPDF;
             this.jsPdfInitialized = true;
-            console.log('PDF library loaded successfully');
         }).catch(error => {
-            console.error('Error loading PDF library:', error);
             this.showToast('Error', 'Error loading PDF library: ' + error.message, 'error');
         });
     }
@@ -34,7 +29,9 @@ export default class GptProfileComponent extends LightningElement {
     profilePicUrl = profilePic;
     name = 'Yogeeswar M';
     email = 'yogeeswar99@gmail.com';
-    mailToLink = 'mailto:' + this.email; // Assuming you have an email variable defined
+    get mailToLink() {
+        return 'mailto:' + this.email;
+    }
     location = 'Hyderabad, India';
     experience = '10 years in IT industry, 7 years in Salesforce';
     linkedInUrl = 'https://www.linkedin.com/in/yogeeswar-madupuri/';
@@ -49,19 +46,16 @@ export default class GptProfileComponent extends LightningElement {
         }
 
         try {
-            console.log('Creating PDF...');
             const doc = new this.jsPDF();
             let yPos = 20;
             const margin = 20;
             const lineHeight = 7;
             
-            console.log('Setting up header...');
             // Header section
             doc.setFontSize(24);
             try {
                 doc.setFont('helvetica', 'bold');
-            } catch (e) {
-                console.error('Font error:', e);
+            } catch {
                 doc.setFont('Helvetica');
             }
             doc.text(this.name, margin, yPos);
@@ -84,7 +78,8 @@ export default class GptProfileComponent extends LightningElement {
             yPos += lineHeight;
             doc.setFontSize(11);
             doc.setFont('helvetica', 'normal');
-            const summary = this.template.querySelector('.summary-text').textContent;
+            const summaryEl = this.template.querySelector('.summary-text');
+            const summary = summaryEl ? summaryEl.textContent : '';
             const splitSummary = doc.splitTextToSize(summary, 170);
             doc.text(splitSummary, margin, yPos);
             yPos += (splitSummary.length * lineHeight) + lineHeight;
@@ -239,7 +234,7 @@ export default class GptProfileComponent extends LightningElement {
 
             let startIndex = 0;
             doc.setFontSize(11);
-            let pageHeight = doc.internal.pageSize.height - 20; // Get usable page height
+            const pageHeight = doc.internal.pageSize.height - 20; // Get usable page height
 
             achievementCategories.forEach((category, idx) => {
                 // Check if we need a new page
@@ -275,16 +270,9 @@ export default class GptProfileComponent extends LightningElement {
                 startIndex = category.endIndex;
             });
 
-            console.log('Saving PDF...');
             // Save the PDF
-            try {
-                doc.save('YogeeswarM_Resume.pdf');
-                console.log('PDF saved successfully');
-                this.showToast('Success', 'PDF downloaded successfully', 'success');
-            } catch (saveError) {
-                console.error('Error saving PDF:', saveError);
-                throw saveError;
-            }
+            doc.save('YogeeswarM_Resume.pdf');
+            this.showToast('Success', 'PDF downloaded successfully', 'success');
         } catch (error) {
             this.showToast('Error', 'Failed to generate PDF: ' + error.message, 'error');
         }
@@ -385,25 +373,29 @@ export default class GptProfileComponent extends LightningElement {
             company: 'F5 Networks',
             position: 'Software Developer Engineer III',
             duration: 'Sep 2020 - Present',
-            project: 'MyF5 Application - Customer Experience Portal'
+            projects: ['MyF5 Application - Customer Experience Portal', 'Order Management System'],
+            location: 'Hyderabad, India'
         },
         {
             company: 'UST Global Sdn. Bhd.',
             position: 'Software Development Engineer',
             duration: 'Aug 2018 - Aug 2020',
-            projects: ['Salesforce DCS - Legal NDA', 'Salesforce DCS - Seller Application']
+            projects: ['Salesforce DCS - Legal NDA', 'Salesforce DCS - Seller Application'],
+            location: 'Cyberjaya, Malaysia'
         },
         {
             company: 'Newt Global Pvt Ltd.',
             position: 'Automation Test Engineer',
             duration: 'Nov 2017 - Jul 2018',
-            project: 'Bill to Cash Automation'
+            projects: ['Bill to Cash Automation'],
+            location: 'Chennai, India'
         },
         {
             company: 'UST Global',
             position: 'Automation Test Engineer',
             duration: 'Aug 2015 - Nov 2017',
-            project: 'Turnpike Automation - Vehicle Insurance Processing'
+            projects: ['Turnpike Automation - Vehicle Insurance Processing'],
+            location: 'Chennai, India'
         }
     ];
 
