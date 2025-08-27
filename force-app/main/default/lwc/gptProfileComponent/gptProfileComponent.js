@@ -1,9 +1,27 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import profilePic from '@salesforce/resourceUrl/profilePhoto';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { loadScript } from 'lightning/platformResourceLoader';
 import JSPDF from '@salesforce/resourceUrl/jspdf';
 
+/**
+ * GptProfileComponent
+ *
+ * Displays a styled professional profile/resume and provides a "Download Resume"
+ * action that generates a PDF using the jsPDF library loaded from a Static Resource.
+ *
+ * Security and compliance highlights:
+ * - External links use rel="noopener noreferrer" to prevent reverse tabnabbing.
+ * - Third-party script is loaded via Static Resource with platform caching.
+ * - No dynamic HTML injection; content is rendered via LWC templates.
+ *
+ * Dependencies:
+ * - Static Resources: `jspdf`, `profilePhoto` (and optional certification images bundle).
+ * - Lightning base components: `lightning-button`, `lightning-icon`.
+ *
+ * Events:
+ * - Dispatches `ShowToastEvent` to communicate success/error to the user.
+ */
 export default class GptProfileComponent extends LightningElement {
     jsPdfInitialized = false;
     jsPDF;
@@ -27,18 +45,23 @@ export default class GptProfileComponent extends LightningElement {
 
     // Personal Information
     profilePicUrl = profilePic;
-    name = 'Yogeeswar M';
-    email = 'yogeeswar99@gmail.com';
+    @api name = 'Yogeeswar M';
+    @api email = 'yogeeswar99@gmail.com';
     get mailToLink() {
         return 'mailto:' + this.email;
     }
-    location = 'Hyderabad, India';
-    experience = '10 years in IT industry, 7 years in Salesforce';
-    linkedInUrl = 'https://www.linkedin.com/in/yogeeswar-madupuri/';
-    linkedInUrlLabel = 'LinkedIn Profile';
-    trailblazerUrl = 'https://www.salesforce.com/trailblazer/ymadupuri';
-    githubUrl = 'https://github.com/yogeeswarmadupuri';
+    @api location = 'Hyderabad, India';
+    @api experience = '10 years in IT industry, 7 years in Salesforce';
+    @api linkedInUrl = 'https://www.linkedin.com/in/yogeeswar-madupuri/';
+    @api linkedInUrlLabel = 'LinkedIn Profile';
+    @api trailblazerUrl = 'https://www.salesforce.com/trailblazer/ymadupuri';
+    @api githubUrl = 'https://github.com/yogeeswarmadupuri';
 
+    /**
+     * Generates and downloads a PDF snapshot of the resume content.
+     * Uses the jsPDF instance loaded in renderedCallback.
+     * Shows a success toast when saved, or an error toast if generation fails.
+     */
     handleDownloadPDF() {
         if (!this.jsPdfInitialized || !this.jsPDF) {
             this.showToast('Error', 'PDF library not initialized', 'error');
@@ -279,6 +302,12 @@ export default class GptProfileComponent extends LightningElement {
     }
 
     // Removed duplicate showToast method
+    /**
+     * Dispatches a Lightning toast event.
+     * @param {string} title - Toast title.
+     * @param {string} message - Toast message.
+     * @param {'success'|'info'|'warning'|'error'} variant - Toast variant.
+     */
     showToast(title, message, variant) {
         this.dispatchEvent(
             new ShowToastEvent({
