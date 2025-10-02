@@ -1,21 +1,39 @@
+:host {
+    /* Centralized theme variables to avoid scattered hex codes */
+    --brand-primary: #2E5266;
+    --brand-primary-2: #4a7c95;
+    --brand-primary-dark: #1f3a47;
+    --brand-muted-bg: #f8f9fa;
+    --brand-muted-bg-2: #e9ecef;
+    --brand-border: #e9ecef;
+    --text-default: #333;
+    --text-muted: #666;
+    --text-inverse: #fff;
+    --accent-info: #63B3ED;
+    --accent-success: #28a745;
+    --accent-success-2: #20c997;
+    --shadow-strong: 0 8px 32px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 16px rgba(0,0,0,0.2);
+    --shadow-light: 0 2px 12px rgba(0,0,0,0.08);
+}
+
 /* Container */
 .resume-container {
     max-width: 1200px;
     padding: 2rem;
     font-family: 'Salesforce Sans', Arial, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--brand-muted-bg) 0%, var(--brand-muted-bg-2) 100%);
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-strong);
 }
 
-.linkedinProfile {
-    color: white;
-}
+/* Removed unused .linkedinProfile rule if not used in HTML */
+/* .linkedinProfile { color: var(--text-inverse); } */
 
 /* Header */
 .header-section {
-    background: linear-gradient(135deg, #2E5266 0%, #1f3a47 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+    color: var(--text-inverse);
     padding: 2.5rem;
     border-radius: 12px;
     margin-bottom: 2rem;
@@ -35,7 +53,7 @@
     border-radius: 50%;
     border: 4px solid rgba(255, 255, 255, 0.2);
     object-fit: cover;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-medium);
 }
 
 /* Name & Contact */
@@ -43,7 +61,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin: 0 0 0.5rem;
-    color: #FFFFFF;
+    color: var(--text-inverse);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -73,21 +91,26 @@
     color: white;
 }
 
-.email-link, .linkedin-link, .profile-link, .trailblazer-link, .github-link {
-    color: #FFFFFF !important;
+/* Avoid !important by scoping to header container */
+.header-section .contact-details a {
+    color: var(--text-inverse);
     text-decoration: none;
     transition: color 0.3s ease;
     font-weight: 400;
 }
 
 .location-text, .experience-text {
-    color: #FFFFFF !important;
+    color: var(--text-inverse);
     font-weight: 400;
 }
 
-.email-link:hover, .linkedin-link:hover, .profile-link:hover, .trailblazer-link:hover, .github-link:hover {
-    color: #63B3ED;
+.header-section .contact-details a:hover {
+    color: var(--accent-info);
     text-decoration: underline;
+}
+.header-section .contact-details a:focus-visible {
+    outline: 2px solid var(--accent-info);
+    outline-offset: 2px;
 }
 
 /* Sections */
@@ -96,14 +119,14 @@
     padding: 2rem;
     margin-bottom: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    border-left: 4px solid #2E5266;
+    box-shadow: var(--shadow-light);
+    border-left: 4px solid var(--brand-primary);
 }
 
 .section-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #2E5266;
+    color: var(--brand-primary);
     margin-bottom: 1rem;
     position: relative;
 }
@@ -115,7 +138,7 @@
     left: 0;
     width: 50px;
     height: 3px;
-    background: linear-gradient(90deg, #2E5266, #4a7c95);
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-2));
     border-radius: 2px;
 }
 
@@ -136,36 +159,36 @@
 }
 
 .salesforce-skill {
-    background: linear-gradient(135deg, #2E5266, #4a7c95);
-    color: white;
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-2));
+    color: var(--text-inverse);
 }
 
 .secondary-skill {
     background: linear-gradient(135deg, #6c757d, #495057);
-    color: white;
+    color: var(--text-inverse);
 }
 
 .leadership-skill {
-    background: linear-gradient(135deg, #28a745, #20c997);
-    color: white;
+    background: linear-gradient(135deg, var(--accent-success), var(--accent-success-2));
+    color: var(--text-inverse);
 }
 
 /* Certifications */
 .certifications-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
 }
 
+/* Consider removing if unused. Keeping for backward compatibility */
 .certification-section {
-
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: #f8f9fa;
+    background: var(--brand-muted-bg);
     border-radius: 8px;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--brand-border);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -191,7 +214,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(180deg, #2E5266, #4a7c95);
+    background: linear-gradient(180deg, var(--brand-primary), var(--brand-primary-2));
 }
 
 .experience-item {
@@ -206,7 +229,7 @@
     top: 0.5rem;
     width: 16px;
     height: 16px;
-    background: #2E5266;
+    background: var(--brand-primary);
     border-radius: 50%;
     border: 3px solid #FFFFFF;
 }
@@ -216,7 +239,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin: 0.5rem 0;
 }
@@ -231,9 +254,16 @@
 
 .projects-label {
     font-weight: 600;
-    color: #2E5266;
+    color: var(--brand-primary);
     margin-bottom: 0.75rem;
     font-size: 0.95rem;
+}
+
+/* Reusable card surface pattern */
+.card-surface {
+    background-color: var(--brand-muted-bg);
+    border-radius: 6px;
+    border: 1px solid var(--brand-border);
 }
 
 .project-item {
@@ -242,9 +272,12 @@
     gap: 0.5rem;
     margin: 0.5rem 0;
     padding: 0.75rem 1rem;
-    background-color: #f8f9fa;
+    background-color: var(--brand-muted-bg);
     border-radius: 6px;
-    border-left: 3px solid #2E5266;
+    border-left: 3px solid var(--brand-primary);
+    border-top: 1px solid var(--brand-border);
+    border-right: 1px solid var(--brand-border);
+    border-bottom: 1px solid var(--brand-border);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -254,20 +287,20 @@
 }
 
 .project-item lightning-icon {
-    --sds-c-icon-color-foreground-default: #2E5266;
+    --sds-c-icon-color-foreground-default: var(--brand-primary);
 }
 
 .project-name {
-    color: #333;
+    color: var(--text-default);
     font-size: 0.95rem;
 }
 
 /* Education */
 .education-item {
-    background: #f8f9fa;
+    background: var(--brand-muted-bg);
     padding: 1.5rem;
     border-radius: 8px;
-    border-left: 4px solid #28a745;
+    border-left: 4px solid var(--accent-success);
 }
 
 /* Achievements */
@@ -276,14 +309,14 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1rem;
-    background: #f8f9fa;
+    background: var(--brand-muted-bg);
     border-radius: 8px;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--brand-border);
     transition: transform 0.3s;
 }
 
 .achievement-icon {
-    --sds-c-icon-color-foreground-default: #28a745;
+    --sds-c-icon-color-foreground-default: var(--accent-success);
 }
 
 /* Responsive */
@@ -294,6 +327,12 @@
     }
     .skills-grid {
         justify-content: center;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
     }
 }
 
