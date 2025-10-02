@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GptProfileComponent</title>
+    <script src="https://unpkg.com/jspdf@2.5.3/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1 id="name"></h1>
+        <p id="email"></p>
+        <p id="location"></p>
+        <p id="experience"></p>
+        <button id="download-pdf-btn">Download PDF</button>
+        <div id="summary-text" class="summary-text"></div>
+    </div>
+
+    <script>
+        // Sample data
+        const profileData = {
+            name: 'Yogeeswar M',
+            email: 'yogeeswar99@gmail.com',
+            location: 'Hyderabad, India',
+            experience: '10 years in IT industry, 7 years in Salesforce',
+            summary: 'Highly motivated and experienced Salesforce professional with a strong background in development and implementation.',
+            salesforceSkills: [
+                'Agentforce',
+                'Prompt Template',
+                'Agent Actions',
+                'Agentforce with Salesforce Einstein',
+                'Apex with Enterprise Patterns',
+                'Lightning Web Components (LWC)',
+                'SOQL/SOSL',
+                'Experience Cloud',
+                'Sales Cloud',
+                'REST API Integration',
+                'Visualforce Pages',
+                'Async Apex',
+                'Batch Apex',
+                'Single Sign-On (SSO)',
+                'CI/CD',
+                'Data Loader'
+            ],
+            secondarySkills: [
+                'SQL',
+                'Core Java',
+                'Selenium',
+                'TestNG',
+                'Maven',
+                'Cucumber',
+                'Copado'
+            ],
+            leadershipSkills: [
+                'Team Management',
+                'Creative Thinking',
+                'Collaborative Leadership',
+                'Agile Methodologies',
+                'Code Review',
+                'Technical Mentoring'
+            ],
+            workExperience: [
+                {
+                    company: 'F5 Networks',
+                    position: 'Software Developer Engineer III',
+                    duration: 'Sep 2020 - Present',
+                    projects: ['MyF5 Application - Customer Experience Portal', 'Order Management System']
+                }
+            ],
+            education: [
+                {
+                    institution: 'P. R. Engineering College',
+                    degree: 'Electronics and Communication Engineering',
+                    year: '2014',
+                    grade: 'CGPA - 8.0 / 10'
+                }
+            ],
+            achievements: [
+                'Developed custom LWC solutions for exporting list views from multiple objects at once.',
+                'Built a custom solution to restore 25k community users who were accidentally deactivated.'
+            ]
+        };
+
+        document.getElementById('name').textContent = profileData.name;
+        document.getElementById('email').textContent = profileData.email;
+        document.getElementById('location').textContent = profileData.location;
+        document.getElementById('experience').textContent = profileData.experience;
+        document.getElementById('summary-text').textContent = profileData.summary;
+
+        document.getElementById('download-pdf-btn').addEventListener('click', generatePdf);
+
+        function generatePdf() {
+            const doc = new jsPDF();
+            let yPos = 20;
+            const margin = 20;
+            const lineHeight = 7;
+
+            // Header section
+            doc.setFontSize(24);
+            try {
+                doc.setFont('helvetica', 'bold');
+            } catch {
+                doc.setFont('Helvetica');
+            }
+            doc.text(profileData.name, margin, yPos);
+            yPos += lineHeight * 2;
+
+            // Contact Information
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            doc.text(profileData.email, margin, yPos);
+            yPos += lineHeight;
+            doc.text(profileData.location, margin, yPos);
+            yPos += lineHeight;
+            doc.text(profileData.experience, margin, yPos);
+            yPos += lineHeight * 2;
+
+            // Professional Summary
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Professional Summary', margin, yPos);
+            yPos += lineHeight;
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            const summary = profileData.summary;
+            const splitSummary = doc.splitTextToSize(summary, 170);
+            doc.text(splitSummary, margin, yPos);
+            yPos += (splitSummary.length * lineHeight) + lineHeight;
+
+            // Skills Section
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Technical Skills', margin, yPos);
+            yPos += lineHeight * 1.5;
+
+            // Salesforce Skills
+            doc.setFontSize(12);
+            doc.text('Salesforce Expertise:', margin, yPos);
+            yPos += lineHeight;
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            profileData.salesforceSkills.forEach(skill => {
+                doc.text('• ' + skill, margin + 5, yPos);
+                yPos += lineHeight;
+            });
+            yPos += lineHeight;
+
+            // Save the PDF
+            doc.save('YogeeswarM_Resume.pdf');
+        }
+    </script>
+</body>
+</html>
