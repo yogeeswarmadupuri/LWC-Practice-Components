@@ -23,27 +23,49 @@ import JSPDF from '@salesforce/resourceUrl/jspdf';
  * - Dispatches `ShowToastEvent` to communicate success/error to the user.
  */
 export default class GptProfileComponent extends LightningElement {
+    /**
+     * Tracks whether the jsPDF script has been loaded to avoid duplicate loads.
+     * Keep primitive types for reactivity and serialization friendliness.
+     */
     jsPdfInitialized = false;
+
+    /**
+     * Holds the constructor function returned by window.jspdf.jsPDF after script load.
+     * Intentionally not decorated; only used internally.
+     */
     jsPDF;
-    
 
 
+    /**
+     * Ensure 3rd-party jsPDF script is loaded once per component instance.
+     * Uses renderedCallback guard pattern per LWC best practices.
+     */
     renderedCallback() {
         if (this.jsPdfInitialized) {
             return;
         }
-        
-        Promise.all([
-            loadScript(this, JSPDF)
-        ]).then(() => {
-            this.jsPDF = window.jspdf.jsPDF;
-            this.jsPdfInitialized = true;
-        }).catch(error => {
-            this.showToast('Error', 'Error loading PDF library: ' + error.message, 'error');
-        });
+
+        loadScript(this, JSPDF)
+            .then(() => {
+                // Defensive check for global exposure from static resource
+                // eslint-disable-next-line no-undef
+                if (window && window.jspdf && typeof window.jspdf.jsPDF === 'function') {
+                    this.jsPDF = window.jspdf.jsPDF;
+                    this.jsPdfInitialized = true;
+                } else {
+                    throw new Error('jsPDF not found on window after script load');
+                }
+            })
+            .catch((error) => {
+                this.showToast('Error', `Error loading PDF library: ${error?.message || error}`, 'error');
+            });
     }
 
     // Personal Information
+    /**
+     * Public API properties for parent configuration.
+     * Defaults are safe placeholders; avoid exposing PII by default in shared repos.
+     */
     profilePicUrl = profilePic;
     @api name = 'Yogeeswar M';
     @api email = 'yogeeswar99@gmail.com';
@@ -297,7 +319,7 @@ export default class GptProfileComponent extends LightningElement {
             doc.save('YogeeswarM_Resume.pdf');
             this.showToast('Success', 'PDF downloaded successfully', 'success');
         } catch (error) {
-            this.showToast('Error', 'Failed to generate PDF: ' + error.message, 'error');
+            this.showToast('Error', `Failed to generate PDF: ${error?.message || error}`, 'error');
         }
     }
 
@@ -309,17 +331,12 @@ export default class GptProfileComponent extends LightningElement {
      * @param {'success'|'info'|'warning'|'error'} variant - Toast variant.
      */
     showToast(title, message, variant) {
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title,
-                message,
-                variant
-            })
-        );
+        this.dispatchEvent(new ShowToastEvent({ title, message, variant }));
     }
 
     // Skills categorized
-    salesforceSkills = [
+    // Use readonly arrays to avoid accidental mutation; can be overridden via @api setters if needed later
+    salesforceSkills = Object.freeze([
         'Agentforce',
         'Prompt Template',
         'Agent Actions',
@@ -336,9 +353,9 @@ export default class GptProfileComponent extends LightningElement {
         'Single Sign-On (SSO)',
         'CI/CD',
         'Data Loader'
-    ];
+    ]);
 
-    secondarySkills = [
+    secondarySkills = Object.freeze([
         'SQL',
         'Core Java',
         'Selenium',
@@ -346,18 +363,19 @@ export default class GptProfileComponent extends LightningElement {
         'Maven',
         'Cucumber',
         'Copado'
-    ];
+    ]);
 
-    leadershipSkills = [
+    leadershipSkills = Object.freeze([
         'Team Management',
         'Creative Thinking',
         'Collaborative Leadership',
         'Agile Methodologies',
         'Code Review',
         'Technical Mentoring'
-    ];
+    ]);
     // Certifications with public badge image URLs (replace placeholders)
-    certifications = [
+    // Consider moving external image URLs to a static resource for reliability and CSP compliance.
+    certifications = Object.freeze([
         {
             name: 'Salesforce Certified Administrator',
             imageUrl: 'https://abhimanyud3dx.github.io/superqbit-static-resources/resources/images/cert/Administrator.png'
@@ -394,10 +412,11 @@ export default class GptProfileComponent extends LightningElement {
             name: 'Copado Fundamentals I',
             imageUrl: 'https://abhimanyud3dx.github.io/superqbit-static-resources/resources/images/cert/copado/Fundamentals I Metadata Pipeline.png'
         }
-    ];
+    ]);
 
     // Work Experience
-    workExperience = [
+    // Replace with generic sample data to avoid exposing personal or company-specific details.
+    workExperience = Object.freeze([
         {
             company: 'F5 Networks',
             position: 'Software Developer Engineer III',
@@ -426,10 +445,10 @@ export default class GptProfileComponent extends LightningElement {
             projects: ['Turnpike Automation - Vehicle Insurance Processing'],
             location: 'Chennai, India'
         }
-    ];
+    ]);
 
     // Education
-    education = [
+    education = Object.freeze([
         {
             institution: 'P. R. Engineering College',
             degree: 'Electronics and Communication Engineering',
@@ -446,7 +465,7 @@ export default class GptProfileComponent extends LightningElement {
             year: '2008',
             grade: 'Percentage - 78%'
         }
-    ];
+    ]);
 
     // Key Achievements
     /*achievements = [
@@ -465,42 +484,42 @@ export default class GptProfileComponent extends LightningElement {
         'Actively participated in all phases of the Scrum ceremony.',
         'Provided production support to resolve customer tickets and gave demos to business users.'
     ];*/
-    achievements = [
-    // Enterprise Integration & Architecture
+    achievements = Object.freeze([
+        // Enterprise Integration & Architecture
     'Architected custom exception logging and integration data logging frameworks enabling effortless developer integration across teams.',
     'Implemented Platform Events for real-time data synchronization between Salesforce and external systems via Boomi subscriptions.',
     'Built advanced Okta SSO integration using Salesforce JIT Handler for seamless user authentication and provisioning.',
     'Developed enterprise-scale REST API integrations with third-party applications using custom Connected Apps and credential management.',
-    
-    // Advanced Salesforce Development
+        
+        // Advanced Salesforce Development
     'Created custom LWC solutions for multi-object list view exports, centralizing data access across multiple business units.',
     'Engineered Dynamic Apex solutions utilizing Object and Field describe information for runtime SOQL, SOSL, and DML operations.',
     'Implemented custom Field History Tracking framework beyond standard Salesforce capabilities for enhanced audit trails.',
     'Successfully restored 25k community users after ServiceNow mass deactivation through custom data recovery solutions.',
-    
-    // Migration & DevOps Excellence
+        
+        // Migration & DevOps Excellence
     'Led end-to-end Salesforce Org Migration with comprehensive domain impact analysis ensuring zero business disruption.',
     'Modernized legacy automation by converting Process Builders to Flows, improving performance and maintainability.',
     'Configured and managed Copado deployments for streamlined CI/CD processes across multiple environments.',
-    
-    // Legal & Document Automation
+        
+        // Legal & Document Automation
     'Developed dynamic Visualforce pages with Adobe integration for legal team agreement generation and digital acceptance workflows.',
     'Created PDF rendering solutions with dynamic parameters for contract generation between enterprise clients.',
-    
-    // Test Automation Innovation
+        
+        // Test Automation Innovation
     'Built comprehensive C# + Selenium automation framework specifically for validating dynamic PDF document generation with variable parameters.',
     'Designed cross-platform test automation covering end-to-end business processes from Salesforce UI to document output validation.',
     'Implemented Jenkins-based CI/CD pipelines with automated smoke and regression test suites, reducing manual testing by 80%.',
     'Developed custom Selenium wrapper functions and TestNG frameworks for complex automated testing scenarios.',
-    
-    // Leadership & Process Excellence
+        
+        // Leadership & Process Excellence
     'Independently managed full-stack application lifecycle ensuring quality delivery across development, testing, and deployment phases.',
     'Collaborated with Technical Architects and developers to resolve complex requirement conflicts and technical challenges.',
     'Active Scrum participant across all ceremonies with focus on quality metrics evaluation and defect prioritization strategies.',
     'Delivered technical demos to business stakeholders and maintained comprehensive documentation in Confluence.',
-    
-    // Business Impact & Recognition
+        
+        // Business Impact & Recognition
     'Received multiple Bef5 awards for exceptional project performance and technical innovation.',
     'Reduced manual validation overhead while significantly improving data quality through strategic automation implementation.'
-];
+    ]);
 }
